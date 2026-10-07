@@ -1,0 +1,249 @@
+@use "sass:color";
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.hero {
+  position: relative;
+  min-height: to-rem(850);
+  height: 100vh;
+  padding-top: to-rem(180);
+  padding-bottom: to-rem(100);
+  background-color: $blue-color;
+
+  background-image:
+    linear-gradient(180deg, #06255b 0, rgba(6, 37, 91, 0) 50%),
+    linear-gradient(90deg, #06255b 0, rgba(6, 37, 91, 0) 50%),
+    url("../../assets/images/hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  clip-path: polygon(0 0, 100% 0, 100% 40%, 65% 100%, 0 100%);
+  overflow: hidden;
+
+  @include respond-to("desktop-sm") {
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  }
+
+  @include respond-to("tablet") {
+    height: auto;
+    min-height: auto;
+    padding-top: to-rem(140);
+    padding-bottom: to-rem(60);
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+    background-image:
+      linear-gradient(
+        180deg,
+        rgba(6, 37, 91, 0.9) 0%,
+        rgba(6, 37, 91, 0.95) 100%
+      ),
+      url("../../assets/images/hero-bg.jpg");
+  }
+
+  &__container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    gap: to-rem(30);
+
+    @include respond-to("tablet") {
+      grid-template-columns: 1fr;
+      gap: to-rem(40);
+    }
+  }
+
+  &__left {
+    position: relative;
+    z-index: 10;
+  }
+
+  &__right {
+    position: relative;
+    height: 100%;
+    @include flex(row, center, center);
+
+    @include respond-to("tablet") {
+      height: auto;
+    }
+  }
+
+  &__content {
+    max-width: to-rem(723);
+  }
+
+  &__title {
+    @include fluid-text(64, 28, 1.1);
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: #f7f7f7;
+    text-transform: uppercase;
+    margin-bottom: to-rem(24);
+
+    span {
+      font-weight: 700;
+    }
+  }
+
+  &__descr {
+    font-size: fluid(25, 15);
+    line-height: 1.1;
+    color: $white-color;
+
+    &:not(:last-of-type) {
+      margin-bottom: to-rem(28);
+    }
+
+    &:last-of-type {
+      margin-bottom: to-rem(40);
+    }
+  }
+
+  &__actions {
+    @include flex(row, flex-start, center, 20, wrap);
+
+    @include respond-to("mobile") {
+      @include flex(column, flex-start, flex-start, 14);
+    }
+  }
+
+  &__btn {
+    padding: to-rem(18) to-rem(32);
+    font-size: to-rem(15);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-align: center;
+    text-transform: uppercase;
+
+    &--primary {
+      background-color: $accent-color;
+      color: $white-color;
+
+      @include hover {
+        background-color: color.adjust($accent-color, $lightness: 7%);
+        transform: translateY(-2px);
+      }
+    }
+
+    &--outline {
+      background-color: transparent;
+      border: 2px solid $white-color;
+      color: $white-color;
+
+      @include hover {
+        background-color: $white-color;
+        color: $blue-color;
+        transform: translateY(-2px);
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+.infographic-hero {
+  position: relative;
+  width: to-rem(360);
+  height: to-rem(380);
+  z-index: 5;
+
+  margin-left: to-rem(10);
+  margin-top: to-rem(-20);
+
+  @include respond-to("tablet") {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: to-rem(30);
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    margin-top: to-rem(40);
+    margin-left: 0;
+  }
+
+  &__item {
+    position: absolute;
+    width: to-rem(124);
+    height: to-rem(124);
+    transition: all $transition-duration ease-in-out;
+
+    &--top {
+      top: to-rem(-70);
+      left: to-rem(120);
+      z-index: 15;
+
+      .infographic-hero__box {
+        background-color: #06255b;
+        border: to-rem(1) solid $white-color;
+      }
+    }
+
+    &--center {
+      top: to-rem(50);
+      left: to-rem(-50);
+      z-index: 3;
+      opacity: 0.9;
+
+      .infographic-hero__box {
+        background-color: rgba(6, 37, 91, 0.8);
+        border: to-rem(9) solid #06255b;
+      }
+    }
+
+    &--bottom {
+      top: to-rem(180);
+      left: to-rem(120);
+      z-index: 4;
+      opacity: 0.9;
+
+      .infographic-hero__box {
+        background-color: rgba(6, 37, 91, 0.8);
+        border: to-rem(1) solid #ff7c40;
+      }
+    }
+
+    @include respond-to("tablet") {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: none !important;
+      width: to-rem(120) !important;
+      height: to-rem(120) !important;
+    }
+  }
+
+  &__box {
+    width: 100%;
+    height: 100%;
+    transform: rotate(45deg);
+    @include flex(row, center, center);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: all $transition-duration ease-in-out;
+
+    @include hover {
+      background-color: $accent-color !important;
+      border-color: $white-color !important;
+      transform: rotate(45deg) scale(1.05);
+      opacity: 1;
+      z-index: 20;
+    }
+
+    span {
+      transform: rotate(-45deg);
+      color: $white-color;
+      font-weight: 900;
+      font-size: to-rem(21);
+      line-height: 0.85;
+
+      @include respond-to("tablet") {
+        font-size: to-rem(12);
+      }
+    }
+  }
+}

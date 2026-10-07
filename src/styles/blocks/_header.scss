@@ -1,0 +1,291 @@
+@use "sass:color";
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.header {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding-block: to-rem(32);
+
+  @include respond-to("tablet") {
+    padding-block: to-rem(16);
+  }
+
+  &__container {
+    @include flex(row, space-between, center);
+  }
+
+  &__logo {
+    @include hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__right {
+    @include flex(row, flex-end, center, 16);
+
+    @include respond-to("tablet") {
+      display: none;
+    }
+  }
+
+  &__btn {
+    height: to-rem(56);
+    padding-inline: to-rem(35);
+    padding-block: 0;
+    background-color: $accent-color;
+    color: $white-color;
+    font-weight: 600;
+    font-size: to-rem(15);
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+
+    @include hover {
+      background-color: color.adjust($accent-color, $lightness: 7%);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+.nav {
+  margin-inline: auto;
+
+  @include respond-to("tablet") {
+    margin-inline: 0;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: to-rem(400);
+    height: 100%;
+    background-color: $accent-color;
+    padding: to-rem(120) to-rem(40) to-rem(40);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    transition: right $transition-duration ease-in-out;
+    z-index: 90;
+
+    &--open {
+      right: 0;
+    }
+  }
+
+  &__mobile-wrapper {
+    @include respond-to("tablet") {
+      @include flex(column, flex-start, flex-start, 40);
+      width: 100%;
+    }
+  }
+
+  &__list {
+    @include flex(row, space-between, center, 32);
+
+    @include respond-to("tablet") {
+      @include flex(column, flex-start, flex-start, 24);
+      width: 100%;
+    }
+  }
+
+  &__link {
+    font-size: to-rem(15);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: $white-color;
+    transition: color $transition-duration ease-in-out;
+
+    @include hover {
+      color: $accent-color;
+    }
+
+    @include respond-to("tablet") {
+      font-size: to-rem(20);
+      color: $white-color;
+      font-weight: 300;
+
+      @include hover {
+        color: $blue-color;
+      }
+    }
+  }
+
+  &__lang--mobile {
+    display: none;
+
+    @include respond-to("tablet") {
+      @include flex(row, center, center, 12);
+      background-color: $white-color;
+      height: to-rem(56);
+      width: 100%;
+      border-radius: to-rem(4);
+      padding-inline: to-rem(20);
+      padding-block: 0;
+
+      .lang-switch__item {
+        @include flex(row, center, center);
+      }
+
+      .lang-switch__link {
+        @include flex(row, center, center, 6);
+        line-height: 1.2;
+        letter-spacing: 0.01em;
+        color: rgba($blue-color, 0.4);
+
+        &--active {
+          color: $blue-color;
+
+          .lang-switch__name {
+            font-weight: 700;
+            position: relative;
+            &::after {
+              content: "";
+              position: absolute;
+              bottom: to-rem(-2);
+              left: 0;
+              width: 100%;
+              height: to-rem(2);
+              background-color: $blue-color;
+            }
+          }
+        }
+      }
+
+      .lang-switch__flag {
+        width: to-rem(16);
+        height: auto;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &__btn {
+    display: none;
+
+    @include respond-to("tablet") {
+      display: block;
+      width: 100%;
+      background-color: transparent;
+      border: 1px solid $white-color;
+
+      @include hover {
+        background-color: $white-color;
+        color: $accent-color;
+        transform: none;
+      }
+    }
+  }
+}
+
+.burger {
+  display: none;
+  position: relative;
+  width: to-rem(30);
+  height: to-rem(22);
+  background: transparent;
+  cursor: pointer;
+  z-index: 100;
+
+  @include respond-to("tablet") {
+    @include flex(column, space-between, center);
+  }
+
+  span,
+  &::before,
+  &::after {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: to-rem(2);
+    background-color: $white-color;
+    transition: all $transition-duration ease-in-out;
+  }
+
+  &::before {
+    content: "";
+    top: 0;
+  }
+
+  span {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    content: "";
+    bottom: 0;
+  }
+
+  &--active {
+    span {
+      transform: scale(0);
+    }
+
+    &::before {
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      background-color: $white-color;
+    }
+
+    &::after {
+      bottom: 50%;
+      transform: translateY(50%) rotate(-45deg);
+      background-color: $white-color;
+    }
+  }
+}
+
+.lang-switch {
+  @include flex(row, center, center, 12);
+  background-color: $white-color;
+  height: to-rem(56);
+  padding-inline: to-rem(20);
+  padding-block: 0;
+
+  &__item {
+    @include flex(row, center, center);
+  }
+
+  &__link {
+    @include flex(row, center, center, 6);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: rgba($blue-color, 0.4);
+
+    @include hover {
+      color: $blue-color;
+    }
+
+    &--active {
+      color: $blue-color;
+
+      .lang-switch__name {
+        font-weight: 700;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: to-rem(-2);
+          left: 0;
+          width: 100%;
+          height: to-rem(2);
+          background-color: $blue-color;
+        }
+      }
+    }
+  }
+
+  &__flag {
+    width: to-rem(16);
+    height: auto;
+    object-fit: contain;
+  }
+}

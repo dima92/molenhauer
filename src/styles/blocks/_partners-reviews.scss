@@ -1,0 +1,224 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.slider-dots {
+  @include flex(row, center, center, 8);
+  margin-top: to-rem(40);
+
+  .swiper-pagination-bullet,
+  &::before,
+  span {
+    display: block;
+    width: to-rem(10);
+    height: to-rem(10);
+    border-radius: 50%;
+    background-color: #cbd5e1;
+    cursor: pointer;
+    transition: background-color $transition-duration ease;
+
+    &:first-child,
+    &.swiper-pagination-bullet-active {
+      background-color: $accent-color;
+    }
+  }
+}
+
+.partners {
+  background-color: $white-color;
+  padding-block: to-rem(80) to-rem(60);
+  border-bottom: 1px solid rgba(#06255b, 0.05);
+
+  &__container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    align-items: center;
+    gap: to-rem(40);
+
+    @include respond-to("tablet") {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+
+  &__title {
+    font-size: to-rem(24);
+    font-weight: 700;
+    line-height: 1.3;
+    color: $blue-color;
+    max-width: to-rem(260);
+
+    @include respond-to("tablet") {
+      max-width: 100%;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__slide {
+    @include flex(row, center, center);
+    padding-block: to-rem(20);
+    width: 33.333%;
+
+    &:not(:last-child) {
+      border-right: 1px solid rgba(#06255b, 0.2);
+      border-style: none dashed none none;
+    }
+
+    @include respond-to("mobile") {
+      width: 100%;
+      border: none !important;
+    }
+  }
+
+  &__logo {
+    max-height: to-rem(60);
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all $transition-duration ease;
+
+    @include hover {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+  }
+}
+
+.reviews {
+  background-color: $white-color;
+  padding-block: to-rem(100);
+  color: $blue-color;
+
+  @include respond-to("tablet") {
+    padding-block: to-rem(60);
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    gap: to-rem(60);
+
+    @include respond-to("tablet") {
+      grid-template-columns: 1fr;
+      gap: to-rem(40);
+    }
+  }
+
+  &__info {
+    @include flex(column, flex-start, flex-start, 24);
+
+    @include respond-to("tablet") {
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  &__title {
+    @include fluid-text(36, 24, 1.2);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &__descr {
+    font-size: to-rem(16);
+    line-height: 1.6;
+    color: #737b7d;
+    max-width: to-rem(280);
+  }
+
+  &__pagination {
+    margin-top: to-rem(20);
+
+    @include respond-to("tablet") {
+      display: none;
+    }
+  }
+}
+
+.card-review {
+  position: relative;
+  padding: to-rem(40) to-rem(60);
+  width: 100%;
+
+  @include respond-to("mobile") {
+    padding: to-rem(30) to-rem(24);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: to-rem(160);
+    height: to-rem(80);
+    border-top: 10px solid $accent-color;
+    border-left: 10px solid $accent-color;
+    pointer-events: none;
+
+    @include respond-to("mobile") {
+      width: to-rem(80);
+      height: to-rem(40);
+      border-width: 6px;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: to-rem(160);
+    height: to-rem(80);
+    border-bottom: 10px solid $accent-color;
+    border-right: 10px solid $accent-color;
+    pointer-events: none;
+
+    @include respond-to("mobile") {
+      width: to-rem(80);
+      height: to-rem(40);
+      border-width: 6px;
+    }
+  }
+
+  &__inner {
+    @include flex(column, flex-start, flex-start, 32);
+  }
+
+  &__logo {
+    max-height: to-rem(50);
+    width: auto;
+    object-fit: contain;
+  }
+
+  &__quote {
+    font-size: to-rem(16);
+    line-height: 1.7;
+    font-style: italic;
+    color: #334155;
+    margin: 0;
+  }
+
+  &__author {
+    @include flex(column, flex-start, flex-start, 4);
+  }
+
+  &__name {
+    font-size: to-rem(18);
+    font-weight: 700;
+    font-style: normal;
+    color: $blue-color;
+  }
+
+  &__role {
+    font-size: to-rem(14);
+    font-weight: 600;
+    color: $accent-color;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}

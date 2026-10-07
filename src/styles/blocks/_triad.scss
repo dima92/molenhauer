@@ -1,0 +1,111 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.triad {
+  background-color: $white-color;
+  padding-block: to-rem(100);
+  color: $blue-color;
+
+  @include respond-to("tablet") {
+    padding-block: to-rem(60);
+  }
+
+  &__container {
+    @include flex(column, flex-start, stretch, 80);
+
+    @include respond-to("tablet") {
+      gap: to-rem(40);
+    }
+  }
+
+  &__top {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    gap: to-rem(60);
+    align-items: start;
+
+    @include respond-to("desktop-sm") {
+      gap: to-rem(40);
+    }
+
+    @include respond-to("tablet") {
+      grid-template-columns: 1fr;
+      gap: to-rem(24);
+    }
+  }
+
+  &__header {
+    @include flex(column, flex-start, flex-start, 24);
+  }
+
+  &__suptitle {
+    font-size: to-rem(15);
+    font-weight: 400;
+    color: #737b7d;
+  }
+
+  &__title {
+    @include fluid-text(32, 22, 1.25);
+    font-weight: 700;
+    color: $accent-color;
+  }
+
+  &__arrow {
+    margin-top: to-rem(16);
+    color: $accent-color;
+
+    @include respond-to("tablet") {
+      display: none;
+    }
+  }
+
+  &__descr {
+    font-size: to-rem(16);
+    line-height: 1.6;
+    color: #1e293b;
+    font-weight: 600;
+
+    p:not(:last-child) {
+      margin-bottom: to-rem(24);
+    }
+  }
+
+  &__grid {
+    @include grid(3, 50);
+
+    @include respond-to("desktop-sm") {
+      gap: to-rem(30);
+    }
+
+    @include respond-to("tablet") {
+      grid-template-columns: 1fr;
+      gap: to-rem(40);
+    }
+  }
+
+  &__col {
+    @include flex(column, flex-start, flex-start, 24);
+
+    @include respond-to("tablet") {
+      gap: to-rem(12);
+    }
+  }
+
+  &__col-title {
+    font-size: to-rem(26);
+    font-weight: 700;
+    line-height: 1.15;
+    color: $blue-color;
+    text-transform: capitalize;
+
+    @include respond-to("tablet") {
+      font-size: to-rem(22);
+    }
+  }
+
+  &__col-text {
+    font-size: to-rem(15);
+    line-height: 1.6;
+    color: #64748b;
+  }
+}

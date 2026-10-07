@@ -1,0 +1,21 @@
+@use "helpers/functions" as *;
+
+// Сетка
+$container-width: 1440;
+$container-padding-x: 15;
+
+// Анимации
+$transition-duration: 0.3s;
+$transition-base: all $transition-duration ease-in-out;
+
+// Шрифты
+$font-family: "Source Sans Pro", sans-serif;
+
+// ==========================================================================
+// ЦВЕТОВАЯ ПАЛИТРА (UI-KIT) — ПРОЕКТ MOLENHAUER
+// ==========================================================================
+$bg-color: #f7f9fc;
+$white-color: #fff;
+$dark-color: #737b7d;
+$accent-color: #da5d24;
+$blue-color: #06255b;
